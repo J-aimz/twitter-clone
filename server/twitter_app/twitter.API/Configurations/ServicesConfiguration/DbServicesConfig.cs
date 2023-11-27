@@ -1,23 +1,23 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.CompilerServices;
+using twitter.API.Configurations.Interface;
 using twitter.Domain.Models;
 using twitter.Infrastructure.DbContext;
 
-namespace twitter.API.Extensions
+namespace twitter.API.Configurations.ServicesConfiguration
 {
-    public static class AddConfig
+    public class DbServicesConfig : IServiceInstaller
     {
-        public static void AddExtention(this IServiceCollection services, string connectionString)
+        public void Install(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContextPool<ApplicationDbContext>(options =>
             {
-                options.UseNpgsql(connectionString);
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddIdentity<AppUser, IdentityRole<Guid>>(opt =>
             {
-                opt.User.RequireUniqueEmail = true; 
+                opt.User.RequireUniqueEmail = true;
                 opt.Password.RequireDigit = false;
                 opt.Password.RequiredLength = 8;
                 opt.Password.RequireLowercase = false;
