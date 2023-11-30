@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace twitter.Application.Home.Query
 {
-    public class HomeTestQueryHanddler : IRequestHandler<HomeTestQuery, IResult<string>>
+    public class HomeTestQueryHandler : IRequestHandler<HomeTestQuery, IResult<string>>
     {
         public async Task<IResult<string>> Handle(HomeTestQuery request, CancellationToken cancellationToken)
         {
-            return await Task.FromResult(Result<string>.Success("Hello world"));
+              return await Result<string>.SuccessAsync("Hello world");
         }
     }
 }
