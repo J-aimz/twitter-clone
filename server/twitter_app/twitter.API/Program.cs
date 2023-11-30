@@ -3,10 +3,6 @@ using twitter.API.Configurations.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblies(typeof(Program).Assembly));
-//services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(Program).Assembly));
-
 
 builder.Services.InstallSevicesConfig(builder.Configuration, typeof(IServiceInstaller).Assembly);
 

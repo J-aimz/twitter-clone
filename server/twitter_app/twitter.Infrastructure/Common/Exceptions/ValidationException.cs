@@ -6,23 +6,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using twitter.Domain.Interfaces.Common.Exceptions;
 
 namespace twitter.Infrastructure.Common.Exceptions
 {
-    public class ValidationBehavior : Exception, IValidationException
+    public class ValidationException : Exception
     {
         //props
         public IDictionary<string, string[]> Errors { get; }
 
         //ctor
-        public ValidationBehavior(ILogger<ValidationBehavior> logger)
+        public ValidationException(ILogger<ValidationException> logger)
            : base("One or more validation failures have occurred.")
         {
             Errors = new Dictionary<string, string[]>();
         }
 
-        public ValidationBehavior(IEnumerable<ValidationFailure> failures) : this()
+        public ValidationException(IEnumerable<ValidationFailure> failures) : this()
         {
             var failureGroups = failures
                 .GroupBy(e => e.PropertyName, e => e.ErrorMessage);
@@ -36,9 +35,7 @@ namespace twitter.Infrastructure.Common.Exceptions
             }
         }
 
-        public ValidationBehavior()
-        {
-        }
+        public ValidationException() { }
 
         //methods
         public string GetErrors()
