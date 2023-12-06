@@ -11,7 +11,7 @@ namespace twitter.Domain.Models
     public class AppUser : IdentityUser<Guid> 
     {
         public string Name { get; set; }
-        public string Avatar { get; set; }
+        public string? Avatar { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
         public int Day { get; set; }
@@ -19,7 +19,7 @@ namespace twitter.Domain.Models
         public int FollowerCount { get; set; }
         public int FollowingCount { get; set; }
 
-        [MaxLength(240)]
+        [MaxLength(160)]
         public string Bio { get; set; }
 
     }

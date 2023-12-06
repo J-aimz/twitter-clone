@@ -9,9 +9,6 @@ namespace twitter.API.Controllers
        
         private readonly ILogger<HomeController> _logger;
 
-		public HomeController(ILogger<ApiController> logger) : base(logger)
-		{
-		}
 
 		[HttpGet("/get-home")]
         public async Task<IActionResult> HomeTestQueryAsync()
