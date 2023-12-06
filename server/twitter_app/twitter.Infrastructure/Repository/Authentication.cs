@@ -28,30 +28,43 @@ namespace twitter.Infrastructure.Repository
 
         public async Task<AppUser> Registration(RegistrationDto registrationDto)
         {
-            if (registrationDto is null) return null;
-
-            AppUser user = new AppUser()
+            try
             {
-                UserName = registrationDto.Email,
-                Email = registrationDto.Email,
-                Year = registrationDto.Year,    
-                Month = registrationDto.Month,
-                Day = registrationDto.Day,  
+                AppUser user = new AppUser()
+                {
+                    UserName = registrationDto.Email,
+                    Email = registrationDto.Email,
+                    Year = registrationDto.Year,
+                    Month = registrationDto.Month,
+                    Day = registrationDto.Day,
+                    Verified = false,
+                    FollowerCount = 0,
+                    FollowingCount = 0,
+                    Bio = ""
+                };
 
-            };
+                _logger.LogInformation("creating user");
+                var result = await _userManager.CreateAsync(user, registrationDto.Password);
 
-            _logger.LogInformation("creating user");
-            var result = await _userManager.CreateAsync(user, registrationDto.Password);
+                if (!result.Succeeded)
+                {
+                    _logger.LogError("User creation failed for user with email: {userEmail}", user.Email);
+                    return new AppUser();
+                }
 
-            if (!result.Succeeded) 
+                _logger.LogInformation("User created successfully with email: {userEmail}", user.Email);
+                _logger.LogInformation("Assigning user a role");
+                await _userManager.AddToRoleAsync(user, "User");
+
+                return user;
+            }
+            catch (Exception)
             {
-                _logger.LogError("User creation failed");
-                return new AppUser();
-            } 
 
-            await _userManager.AddToRoleAsync(user, "User");
+                return null;
+            }
 
-            return user;
+            
 
         }
     }
