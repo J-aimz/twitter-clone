@@ -1,3 +1,5 @@
+using FluentValidation;
+using System.Reflection;
 using twitter.API.Configurations;
 using twitter.API.Configurations.Interface;
 
