@@ -4,7 +4,7 @@ using ValidationException = twitter.Infrastructure.Common.Exceptions.ValidationE
 
 namespace twitter.Infrastructure.Common.Behaviour
 {
-	public class ValidationBehavior<TRequest, TResponse> :  IPipelineBehavior<TRequest, TResponse>
+    public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;

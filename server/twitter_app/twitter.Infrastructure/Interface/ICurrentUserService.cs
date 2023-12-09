@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace twitter.Domain.Interfaces.Common
+namespace twitter.Infrastructure.Interface
 {
     public interface ICurrentUserService
     {

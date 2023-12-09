@@ -397,3 +397,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /server/twitter_app/twitter.API/Controllers/HomeController.cs
+server/twitter_app/twitter.Domain/Interfaces/Common/Behaviour/IValidationBehavior.cs
+server/twitter_app/twitter.Domain/Interfaces/Common/Behaviour/IValidationBehavior.cs
+server/twitter_app/twitter.Domain/Interfaces/Common/Behaviour/IValidationBehavior.cs

@@ -2,6 +2,8 @@
 using twitter.Domain.Interfaces.Common;
 using twitter.Domain.Interfaces.Repository;
 using twitter.Infrastructure.Common;
+using twitter.Infrastructure.Implementation;
+using twitter.Infrastructure.Interface;
 using twitter.Infrastructure.Repository;
 
 namespace twitter.API.Configurations.ServicesConfiguration

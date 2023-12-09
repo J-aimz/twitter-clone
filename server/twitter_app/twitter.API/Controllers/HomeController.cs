@@ -15,5 +15,6 @@ namespace twitter.API.Controllers
         {   
             return await Initiate(() => Mediator.Send(new HomeTestQuery()));
         }
+            
     }
 }
