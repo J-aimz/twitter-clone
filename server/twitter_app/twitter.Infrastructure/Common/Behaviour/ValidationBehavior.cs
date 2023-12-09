@@ -1,17 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using twitter.Infrastructure.Common.Exceptions;
 using ValidationException = twitter.Infrastructure.Common.Exceptions.ValidationException;
 
 namespace twitter.Infrastructure.Common.Behaviour
 {
-    public class ValidationBehavior<TRequest, TResponse> :  IPipelineBehavior<TRequest, TResponse>
+	public class ValidationBehavior<TRequest, TResponse> :  IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;

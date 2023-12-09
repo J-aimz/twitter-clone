@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace twitter.Application.Home.Query
 {
-    public class HomeTestQueryHandler : IRequestHandler<HomeTestQuery, IResult<string>>
+    public class HomeTestQuer2yHandler : IRequestHandler<HomeTestQuery, IResult<string>>
     {
         public async Task<IResult<string>> Handle(HomeTestQuery request, CancellationToken cancellationToken)
         {

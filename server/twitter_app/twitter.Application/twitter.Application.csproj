@@ -18,4 +18,8 @@
     <Folder Include="Home\Command\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\twitter.Domain\twitter.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
