@@ -16,9 +16,9 @@ namespace twitter.API.Controllers
 
         //mthds
         [HttpPost("create-user")]
-        public async Task<IActionResult> CreateUser(RegistrationDto registrationDto)
+        public async Task<IActionResult> CreateUser([FromBody] RegistrationCommand registrationCommand)
         {
-            return await Initiate(() => Mediator.Send(new RegistrationCommand(registrationDto)));
+            return await Initiate(() => Mediator.Send(registrationCommand));
         }
 
     }

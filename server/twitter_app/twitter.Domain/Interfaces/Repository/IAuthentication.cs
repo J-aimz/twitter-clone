@@ -11,6 +11,7 @@ namespace twitter.Domain.Interfaces.Repository
 {
     public interface IAuthentication
     {
-        Task<AppUser> Registration(RegistrationDto registrationDto);
-    }
+		Task<RegistrationDto> Registration(RegistrationDto registrationDto);
+
+	}
 }

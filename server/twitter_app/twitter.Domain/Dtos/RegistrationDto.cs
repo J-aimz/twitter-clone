@@ -23,5 +23,8 @@ namespace twitter.Domain.Dtos
 
         [Required]
         public int Day { get; set; }
+
+        [Required]
+        public string Name { get; set; }    
     }
 }

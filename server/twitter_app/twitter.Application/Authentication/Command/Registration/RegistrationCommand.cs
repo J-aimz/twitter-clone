@@ -11,21 +11,21 @@ using twitter.Domain.Models;
 
 namespace twitter.Application.Authentication.Command.Registration
 {
-    public class RegistrationCommand : IRequest<IResult<AppUser>>
+    public class RegistrationCommand : IRequest<IResult<RegistrationResponse>>
     {
+        public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
         public int Day { get; set; }
 
-        public RegistrationCommand(RegistrationDto registrationDto)
-        {
-            Email = registrationDto.Email;
-            Password = registrationDto.Password;
-            Year = registrationDto.Year;
-            Month = registrationDto.Month;
-            Day = registrationDto.Day;
-        }
+       
     }
+
+
+	public class RegistrationResponse  : RegistrationCommand
+	{
+		
+	}
 }

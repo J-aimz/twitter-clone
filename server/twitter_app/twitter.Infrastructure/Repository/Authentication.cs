@@ -26,12 +26,13 @@ namespace twitter.Infrastructure.Repository
             _signInManager = signInManager;
         }
 
-        public async Task<AppUser> Registration(RegistrationDto registrationDto)
+        public async Task<RegistrationDto> Registration(RegistrationDto registrationDto)
         {
             try
             {
                 AppUser user = new AppUser()
                 {
+                    Name = registrationDto.Name,
                     UserName = registrationDto.Email,
                     Email = registrationDto.Email,
                     Year = registrationDto.Year,
@@ -40,7 +41,9 @@ namespace twitter.Infrastructure.Repository
                     Verified = false,
                     FollowerCount = 0,
                     FollowingCount = 0,
-                    Bio = ""
+                    Bio = "",
+                    Avatar = "truytrueuf"
+                    
                 };
 
                 _logger.LogInformation("creating user");
@@ -49,14 +52,14 @@ namespace twitter.Infrastructure.Repository
                 if (!result.Succeeded)
                 {
                     _logger.LogError("User creation failed for user with email: {userEmail}", user.Email);
-                    return new AppUser();
+                    return null;
                 }
 
                 _logger.LogInformation("User created successfully with email: {userEmail}", user.Email);
                 _logger.LogInformation("Assigning user a role");
-                await _userManager.AddToRoleAsync(user, "User");
+               // await _userManager.AddToRoleAsync(user, "User");
 
-                return user;
+                return registrationDto;
             }
             catch (Exception)
             {

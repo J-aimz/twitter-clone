@@ -13,7 +13,7 @@ using twitter.Domain.Models;
 
 namespace twitter.Application.Authentication.Command.Registration
 {
-    public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, IResult<AppUser>>
+    public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, IResult<RegistrationResponse>>
     {
         private readonly IAuthentication _auth;
         private readonly ILogger<RegistrationCommandHandler> _logger;
@@ -25,12 +25,13 @@ namespace twitter.Application.Authentication.Command.Registration
         } 
         
 
-        public async Task<IResult<AppUser>> Handle(RegistrationCommand request, CancellationToken cancellationToken)
+        public async Task<IResult<RegistrationResponse>> Handle(RegistrationCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 RegistrationDto registrationDto = new RegistrationDto()
                 {
+                    Name = request.Name,
                     Email = request.Email,  
                     Password = request.Password,
                     Year = request.Year,    
@@ -41,17 +42,29 @@ namespace twitter.Application.Authentication.Command.Registration
                 _logger.LogInformation("Registering a User");
                 var result = await _auth.Registration(registrationDto);
 
-                if (result is null) return Result<AppUser>.Fail("Oops something went wrong we are working to fix it");
-                else if (result.Email != request.Email) return Result<AppUser>.Fail("Oops something went wrong we are working to fix it");
+                if (result is null) return Result<RegistrationResponse>.Fail("User registration failed!");
+                //else if (result.Email != request.Email) return Result<RegistrationResponse>.Fail("Oops something went wrong we are working to fix it");
 
-                return Result<AppUser>.Success(result);
+                var registrationResponse = new RegistrationResponse()
+                {
+                    Name = registrationDto.Name,
+                    Email = registrationDto.Email,
+                    Password = registrationDto.Password,
+                    Year = registrationDto.Year,
+                    Month = registrationDto.Month,
+                    Day = registrationDto.Day,
+                };
+                 
+                return Result<RegistrationResponse>.Success(registrationResponse);
             }
             catch (Exception ex)
             {
                 _logger.LogError("User registration failed with message: {msg} and source: {src} ", ex.Message, ex.StackTrace);
-                return Result<AppUser>.Fail("Oops something went wrong we are working to fix it");
+                return Result<RegistrationResponse>.Fail("Oops something went wrong we are working to fix it");
                 throw;
             }
         }
-    }
+
+	
+	}
 }
